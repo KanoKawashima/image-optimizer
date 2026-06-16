@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import sharp from "sharp";
 
+export const runtime = "nodejs";
+
 type OutputFile = {
   originalName: string;
   name: string;
