@@ -66,7 +66,6 @@ export async function POST(request: NextRequest) {
       } else if (metadata.format === "png") {
         optimizedBuffer = await sharp(buffer)
           .png({
-            quality: jpgQuality,
             compressionLevel: 9,
           })
           .toBuffer();
