@@ -11,12 +11,36 @@
   font-weight: 700;
 }
 
-.card {
-  padding: 28px;
+.gridWrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: 1fr auto; 
+  gap: 20px 20px; 
+  grid-template-areas: 
+    "card_01 card_01"
+    "card_02 card_03";
+  align-items: start;
   margin-bottom: 24px;
+}
+.gridWrap:has(.accordionContent) {
+  align-items: stretch;
+}
+
+.card {
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 10px;
   background: #fff;
+}
+
+.card:nth-child(1) {
+  grid-area: card_01;
+}
+.card:nth-child(2) {
+  grid-area: card_02;
+}
+.card:nth-child(3) {
+  grid-area: card_03;
 }
 
 .heading {
@@ -47,6 +71,8 @@
   color: #666;
   font-size: 14px;
   line-height: 1.9;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .notes li {
@@ -87,8 +113,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
   font-size: 16px;
 }
 
@@ -98,6 +123,7 @@
   border: 1px solid #bbb;
   border-radius: 4px;
   text-align: right;
+  margin-left: auto;
 }
 
 .button,
@@ -230,15 +256,6 @@
   color: #666;
   font-size: 12px;
   line-height: 1.6;
-  text-align: right;
-  margin-bottom: 14px;
-}
-
-.recommended {
-  margin-left: 8px;
-  color: #008000;
-  font-size: 12px;
-  font-weight: 700;
 }
 
 .pngQualityNote {

@@ -245,182 +245,163 @@ export default function Home() {
     <main className={styles.container}>
       <h1 className={styles.title}>画像最適化ツール</h1>
 
-      <div className={styles.card}>
-        <div
-          className={`${styles.dropzone} ${
-            isDragging ? styles.dragging : ""
-          }`}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragEnter={handleDragEnter}
-          onDragLeave={handleDragLeave}
-        >
-          <label className={styles.upload}>
-            <input
-              type="file"
-              multiple
-              accept=".jpg,.jpeg,.png"
-              onChange={handleFileChange}
-            />
-            画像を選択
-          </label>
+      <div className={styles.gridWrap}>
+        <div className={styles.card}>
+          <div
+            className={`${styles.dropzone} ${
+              isDragging ? styles.dragging : ""
+            }`}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+          >
+            <label className={styles.upload}>
+              <input
+                type="file"
+                multiple
+                accept=".jpg,.jpeg,.png"
+                onChange={handleFileChange}
+              />
+              画像を選択
+            </label>
 
-          <p className={styles.dropText}>
-            または画像をドラッグ＆ドロップ
-          </p>
-        </div>
-
-        <ul className={styles.notes}>
-          <li>JPG・PNGのみ対応</li>
-          <li>1ファイル10MBまで</li>
-          <li>最大20枚まで</li>
-          <li>画像はサーバーに保存されません</li>
-        </ul>
-
-        {images.length > 0 && (
-          <div className={styles.selected}>
-            <p>{images.length}枚の画像を選択中</p>
-
-            <ul className={styles.fileList}>
-              {images.map((image) => (
-                <li key={image.name}>
-                  {image.name} / {(image.size / 1024).toFixed(1)}KB
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-
-      <div className={styles.card}>
-        <h2 className={styles.heading}>出力形式</h2>
-
-        <label className={styles.checkbox}>
-          <input
-            type="checkbox"
-            checked={outputOriginal}
-            onChange={(e) =>
-              setOutputOriginal(e.target.checked)
-            }
-          />
-          JPG / PNG 最適化
-        </label>
-
-        <label className={styles.checkbox}>
-          <input
-            type="checkbox"
-            checked={outputWebp}
-            onChange={(e) =>
-              setOutputWebp(e.target.checked)
-            }
-          />
-          WebP生成
-        </label>
-
-        <label className={styles.checkbox}>
-          <input
-            type="checkbox"
-            checked={outputAvif}
-            onChange={(e) =>
-              setOutputAvif(e.target.checked)
-            }
-          />
-          AVIF生成
-        </label>
-      </div>
-
-      <div className={styles.card}>
-        <button
-          type="button"
-          className={styles.accordionButton}
-          onClick={() => setIsQualityOpen(!isQualityOpen)}
-        >
-          <span>品質設定</span>
-          <span>{isQualityOpen ? "−" : "＋"}</span>
-        </button>
-
-        {isQualityOpen && (
-          <div className={styles.accordionContent}>
-            <div>
-              <label className={styles.quality}>
-                JPG品質
-
-                <input
-                  type="number"
-                  min="1"
-                  max="100"
-                  value={jpgQuality}
-                  onChange={(e) =>
-                    setJpgQuality(
-                      Number(e.target.value)
-                    )
-                  }
-                />
-              </label>
-
-              <p className={styles.qualityNote}>
-                推奨設定：
-                <span className={styles.recommended}>
-                  80
-                </span>
-              </p>
-            </div>
-
-            <div>
-              <label className={styles.quality}>
-                WebP品質
-
-                <input
-                  type="number"
-                  min="1"
-                  max="100"
-                  value={webpQuality}
-                  onChange={(e) =>
-                    setWebpQuality(
-                      Number(e.target.value)
-                    )
-                  }
-                />
-              </label>
-
-              <p className={styles.qualityNote}>
-                推奨設定：
-                <span className={styles.recommended}>
-                  80
-                </span>
-              </p>
-            </div>
-
-            <div>
-              <label className={styles.quality}>
-                AVIF品質
-
-                <input
-                  type="number"
-                  min="1"
-                  max="100"
-                  value={avifQuality}
-                  onChange={(e) =>
-                    setAvifQuality(
-                      Number(e.target.value)
-                    )
-                  }
-                />
-              </label>
-
-              <p className={styles.qualityNote}>
-                推奨設定：
-                <span className={styles.recommended}>
-                  50
-                </span>
-              </p>
-            </div>
-
-            <p className={styles.pngQualityNote}>
-              ※PNGは可逆圧縮のため、品質設定を変更してもファイルサイズは大きく変わらない場合があるため、設定変更できません。
+            <p className={styles.dropText}>
+              または画像をドラッグ＆ドロップ
             </p>
           </div>
-        )}
+
+          <ul className={styles.notes}>
+            <li>JPG・PNGのみ対応</li>
+            <li>1ファイル10MBまで</li>
+            <li>最大20枚まで</li>
+            <li>画像はサーバーに保存されません</li>
+          </ul>
+
+          {images.length > 0 && (
+            <div className={styles.selected}>
+              <p>{images.length}枚の画像を選択中</p>
+
+              <ul className={styles.fileList}>
+                {images.map((image) => (
+                  <li key={image.name}>
+                    {image.name} / {(image.size / 1024).toFixed(1)}KB
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <div className={styles.card}>
+          <h2 className={styles.heading}>出力形式</h2>
+
+          <label className={styles.checkbox}>
+            <input
+              type="checkbox"
+              checked={outputOriginal}
+              onChange={(e) =>
+                setOutputOriginal(e.target.checked)
+              }
+            />
+            JPG / PNG 最適化
+          </label>
+
+          <label className={styles.checkbox}>
+            <input
+              type="checkbox"
+              checked={outputWebp}
+              onChange={(e) =>
+                setOutputWebp(e.target.checked)
+              }
+            />
+            WebP生成
+          </label>
+
+          <label className={styles.checkbox}>
+            <input
+              type="checkbox"
+              checked={outputAvif}
+              onChange={(e) =>
+                setOutputAvif(e.target.checked)
+              }
+            />
+            AVIF生成
+          </label>
+        </div>
+
+        <div className={styles.card}>
+          <button
+            type="button"
+            className={styles.accordionButton}
+            onClick={() => setIsQualityOpen(!isQualityOpen)}
+          >
+            <span>品質設定</span>
+            <span>{isQualityOpen ? "−" : "＋"}</span>
+          </button>
+
+          {isQualityOpen && (
+            <div className={styles.accordionContent}>
+              <div>
+                <label className={styles.quality}>
+                  JPG品質<span className={styles.qualityNote}>（推奨設定：80）</span>
+
+                  <input
+                    type="number"
+                    min="1"
+                    max="100"
+                    value={jpgQuality}
+                    onChange={(e) =>
+                      setJpgQuality(
+                        Number(e.target.value)
+                      )
+                    }
+                  />
+                </label>
+              </div>
+
+              <div>
+                <label className={styles.quality}>
+                  WebP品質<span className={styles.qualityNote}>（推奨設定：80）</span>
+
+                  <input
+                    type="number"
+                    min="1"
+                    max="100"
+                    value={webpQuality}
+                    onChange={(e) =>
+                      setWebpQuality(
+                        Number(e.target.value)
+                      )
+                    }
+                  />
+                </label>
+              </div>
+
+              <div>
+                <label className={styles.quality}>
+                  AVIF品質<span className={styles.qualityNote}>（推奨設定：50）</span>
+
+                  <input
+                    type="number"
+                    min="1"
+                    max="100"
+                    value={avifQuality}
+                    onChange={(e) =>
+                      setAvifQuality(
+                        Number(e.target.value)
+                      )
+                    }
+                  />
+                </label>
+              </div>
+
+              <p className={styles.pngQualityNote}>
+                ※PNGは可逆圧縮のため、品質設定を変更してもファイルサイズは大きく変わらない場合があるため、設定変更できません。
+              </p>
+            </div>
+          )}
+        </div>
       </div>
 
       <button
