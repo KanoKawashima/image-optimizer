@@ -9,7 +9,6 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [isQualityOpen, setIsQualityOpen] = useState(false);
   const [results, setResults] = useState<
     {
       originalName: string;
@@ -331,76 +330,66 @@ export default function Home() {
         </div>
 
         <div className={styles.card}>
-          <button
-            type="button"
-            className={styles.accordionButton}
-            onClick={() => setIsQualityOpen(!isQualityOpen)}
-          >
-            <span>品質設定</span>
-            <span>{isQualityOpen ? "−" : "＋"}</span>
-          </button>
+          <h2 className={styles.heading}>品質設定</h2>
+          <div className={styles.accordionContent}>
+            <div>
+              <label className={styles.quality}>
+                JPG品質<span className={styles.qualityNote}>（推奨設定：80）</span>
 
-          {isQualityOpen && (
-            <div className={styles.accordionContent}>
-              <div>
-                <label className={styles.quality}>
-                  JPG品質<span className={styles.qualityNote}>（推奨設定：80）</span>
-
-                  <input
-                    type="number"
-                    min="1"
-                    max="100"
-                    value={jpgQuality}
-                    onChange={(e) =>
-                      setJpgQuality(
-                        Number(e.target.value)
-                      )
-                    }
-                  />
-                </label>
-              </div>
-
-              <div>
-                <label className={styles.quality}>
-                  WebP品質<span className={styles.qualityNote}>（推奨設定：80）</span>
-
-                  <input
-                    type="number"
-                    min="1"
-                    max="100"
-                    value={webpQuality}
-                    onChange={(e) =>
-                      setWebpQuality(
-                        Number(e.target.value)
-                      )
-                    }
-                  />
-                </label>
-              </div>
-
-              <div>
-                <label className={styles.quality}>
-                  AVIF品質<span className={styles.qualityNote}>（推奨設定：50）</span>
-
-                  <input
-                    type="number"
-                    min="1"
-                    max="100"
-                    value={avifQuality}
-                    onChange={(e) =>
-                      setAvifQuality(
-                        Number(e.target.value)
-                      )
-                    }
-                  />
-                </label>
-              </div>
-
-              <p className={styles.pngQualityNote}>
-                ※PNGは可逆圧縮のため、品質設定を変更してもファイルサイズは大きく変わらない場合があるため、設定変更できません。
-              </p>
+                <input
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={jpgQuality}
+                  onChange={(e) =>
+                    setJpgQuality(
+                      Number(e.target.value)
+                    )
+                  }
+                />
+              </label>
             </div>
-          )}
+
+            <div>
+              <label className={styles.quality}>
+                WebP品質<span className={styles.qualityNote}>（推奨設定：80）</span>
+
+                <input
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={webpQuality}
+                  onChange={(e) =>
+                    setWebpQuality(
+                      Number(e.target.value)
+                    )
+                  }
+                />
+              </label>
+            </div>
+
+            <div>
+              <label className={styles.quality}>
+                AVIF品質<span className={styles.qualityNote}>（推奨設定：50）</span>
+
+                <input
+                  type="number"
+                  min="1"
+                  max="100"
+                  value={avifQuality}
+                  onChange={(e) =>
+                    setAvifQuality(
+                      Number(e.target.value)
+                    )
+                  }
+                />
+              </label>
+            </div>
+
+            <p className={styles.pngQualityNote}>
+              ※PNGは可逆圧縮のため、設定変更できません。
+            </p>
+          </div>
         </div>
       </div>
 
