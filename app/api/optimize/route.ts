@@ -67,6 +67,7 @@ export async function POST(request: NextRequest) {
         optimizedBuffer = await sharp(buffer)
           .png({
             compressionLevel: 9,
+            adaptiveFiltering: true,
           })
           .toBuffer();
 
