@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
         optimizedBuffer = await sharp(buffer)
           .png({
             palette: true,
-            quality: 85,
+            quality: 90,
             effort: 10,
             colours: 256,
             compressionLevel: 9,
