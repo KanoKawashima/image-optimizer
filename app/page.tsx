@@ -25,7 +25,6 @@ export default function Home() {
   const [outputOriginal, setOutputOriginal] = useState(true);
   const [outputWebp, setOutputWebp] = useState(true);
   const [outputAvif, setOutputAvif] = useState(false);
-  const [pngCompression, setPngCompression] = useState("lossy");
 
   const [jpgQuality, setJpgQuality] =
     useState(80);
@@ -146,11 +145,6 @@ export default function Home() {
       formData.append(
         "outputAvif",
         String(outputAvif)
-      );
-
-      formData.append(
-        "pngCompression",
-        pngCompression
       );
 
       formData.append("jpgQuality", String(jpgQuality));
@@ -333,47 +327,11 @@ export default function Home() {
             />
             AVIF生成
           </label>
-
-          <h3 className={styles.subHeading}>PNG圧縮方式</h3>
-
-          <label className={styles.radio}>
-            <input
-              type="radio"
-              name="pngCompression"
-              value="lossy"
-              checked={pngCompression === "lossy"}
-              onChange={(e) =>
-                setPngCompression(e.target.value)
-              }
-            />
-            高圧縮（推奨）
-          </label>
-
-          <p className={styles.radioNote}>
-            画質をほぼ維持したまま軽量化します。
-          </p>
-
-          <label className={styles.radio}>
-            <input
-              type="radio"
-              name="pngCompression"
-              value="lossless"
-              checked={pngCompression === "lossless"}
-              onChange={(e) =>
-                setPngCompression(e.target.value)
-              }
-            />
-            可逆圧縮
-          </label>
-
-          <p className={styles.radioNote}>
-            画質を一切変更せず圧縮します。
-          </p>
         </div>
 
         <div className={styles.card}>
           <h2 className={styles.heading}>品質設定</h2>
-          <div className={styles.accordionContent}>
+          <div>
             <div>
               <label className={styles.quality}>
                 JPG品質<span className={styles.qualityNote}>（推奨設定：80）</span>
@@ -429,7 +387,7 @@ export default function Home() {
             </div>
 
             <p className={styles.pngQualityNote}>
-              ※PNGは設定変更できません。
+              ※ PNGは画質をほぼ維持したまま高圧縮します。設定変更はできません。
             </p>
           </div>
         </div>
