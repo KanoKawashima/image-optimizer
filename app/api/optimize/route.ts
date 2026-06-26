@@ -17,6 +17,8 @@ type OutputFile = {
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
 
+  const pngCompression = formData.get("pngCompression") as string;
+
   const files = formData.getAll("images") as File[];
 
   const outputOriginal =
@@ -64,16 +66,30 @@ export async function POST(request: NextRequest) {
 
         mime = "image/jpeg";
       } else if (metadata.format === "png") {
-        optimizedBuffer = await sharp(buffer)
-          .png({
-            compressionLevel: 9,
-            adaptiveFiltering: true,
-          })
-          .toBuffer();
+        if (pngCompression === "lossless") {
+          optimizedBuffer = await sharp(buffer)
+            .png({
+              compressionLevel: 9,
+              adaptiveFiltering: true,
+            })
+            .toBuffer();
+        } else {
+          optimizedBuffer = await sharp(buffer)
+            .png({
+              palette: true,
+              quality: 90,
+              effort: 10,
+            })
+            .toBuffer();
+        }
 
         mime = "image/png";
       } else {
         continue;
+      }
+
+      if (optimizedBuffer.length > buffer.length) {
+        optimizedBuffer = buffer;
       }
 
       outputFiles.push({
