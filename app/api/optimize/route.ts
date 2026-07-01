@@ -8,10 +8,8 @@ type OutputFile = {
   name: string;
   mime: string;
   file: string;
-  preview?: string;
   beforeSize: number;
   afterSize: number;
-  previewMime?: string;
 };
 
 export async function POST(request: NextRequest) {
@@ -88,10 +86,8 @@ export async function POST(request: NextRequest) {
         name: outputName,
         mime,
         file: optimizedBuffer.toString("base64"),
-        preview: buffer.toString("base64"),
         beforeSize: file.size,
         afterSize: optimizedBuffer.length,
-        previewMime: file.type,
       });
     }
 
@@ -107,10 +103,8 @@ export async function POST(request: NextRequest) {
         name: `${baseName}.webp`,
         mime: "image/webp",
         file: webpBuffer.toString("base64"),
-        preview: buffer.toString("base64"),
         beforeSize: file.size,
         afterSize: webpBuffer.length,
-        previewMime: file.type,
       });
     }
 
@@ -126,10 +120,8 @@ export async function POST(request: NextRequest) {
         name: `${baseName}.avif`,
         mime: "image/avif",
         file: avifBuffer.toString("base64"),
-        preview: buffer.toString("base64"),
         beforeSize: file.size,
         afterSize: avifBuffer.length,
-        previewMime: file.type,
       });
     }
   }
