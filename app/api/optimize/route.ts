@@ -10,6 +10,8 @@ type OutputFile = {
   file: string;
   beforeSize: number;
   afterSize: number;
+  preview: string;
+  previewmine: string;
 };
 
 export async function POST(request: NextRequest) {
@@ -88,6 +90,8 @@ export async function POST(request: NextRequest) {
         file: optimizedBuffer.toString("base64"),
         beforeSize: file.size,
         afterSize: optimizedBuffer.length,
+        preview: buffer.toString("base64"),
+        previewMime: file.type,
       });
     }
 
@@ -105,6 +109,8 @@ export async function POST(request: NextRequest) {
         file: webpBuffer.toString("base64"),
         beforeSize: file.size,
         afterSize: webpBuffer.length,
+        preview: buffer.toString("base64"),
+        previewMime: file.type,
       });
     }
 
@@ -122,6 +128,8 @@ export async function POST(request: NextRequest) {
         file: avifBuffer.toString("base64"),
         beforeSize: file.size,
         afterSize: avifBuffer.length,
+        preview: buffer.toString("base64"),
+        previewMime: file.type,
       });
     }
   }

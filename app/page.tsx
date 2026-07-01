@@ -156,7 +156,17 @@ export default function Home() {
         body: formData,
       });
 
+      if (!response.ok) {
+        setMessage(`変換に失敗しました。Status: ${response.status}`);
+        return;
+      }
+
       const data = await response.json();
+
+      if (!data.files || data.files.length === 0) {
+        setMessage("変換できる画像がありませんでした");
+        return;
+      }
 
       setResults(data.files);
 
