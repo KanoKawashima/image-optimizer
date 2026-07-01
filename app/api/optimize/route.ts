@@ -11,7 +11,7 @@ type OutputFile = {
   beforeSize: number;
   afterSize: number;
   preview: string;
-  previewmine: string;
+  previewMime: string;
 };
 
 export async function POST(request: NextRequest) {
